@@ -1,0 +1,31 @@
+.doclist {
+    background: #F5F5F4;
+}
+
+.addDoc {
+    cursor: pointer;
+}
+
+.doclist .note-item {
+    overflow: hidden;
+}
+
+.doclist .note-list-items {
+    height: calc(100vh - 100px);
+    overflow: auto;
+}
+
+.noteTitle {
+    font-weight: 900;
+}
+
+.noteContent {
+    height: 45px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+
+.searchBox {
+    width: 100%;
+}
