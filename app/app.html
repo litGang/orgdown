@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <title>orgdown</title>
     <script>
-		(function() {
-			if (!process.env.HOT) {
-				const link = document.createElement('link');
-				link.rel = 'stylesheet';
-				link.href = './dist/style.css';
-				document.write(link.outerHTML);
-			}
-		}());
+		// (function() {
+		// 	if (!process.env.HOT) {
+		// 		const link = document.createElement('link');
+		// 		link.rel = 'stylesheet';
+		// 		link.href = './dist/style.css';
+		// 		document.write(link.outerHTML);
+		// 	}
+		// }());
     </script>
 </head>
 <body>
@@ -22,7 +22,7 @@
 		const port = process.env.PORT || 3000;
 		script.src = (process.env.HOT)
 			? 'http://localhost:' + port + '/dist/bundle.js'
-			: './dist/bundle.js';
+			: '../dist/bundle.js';
 		document.write(script.outerHTML);
 	}
 </script>

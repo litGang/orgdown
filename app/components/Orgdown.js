@@ -52,7 +52,6 @@ export default React.createClass({
         const allOptions = Object.assign({}, initialOptions, this.props.options);
         this.editor = new Orgdown.editor(allOptions);
         this.editor.setValue(this.props.value || '');
-        window.orgdown = this.editor;
     },
 
     eventWrapper: function () {
@@ -106,7 +105,7 @@ export default React.createClass({
 
 	render: function () {
 		return (
-            <div>
+            <div className="orgdown-editor">
 				{this.renderToolbar()}
 				{this.renderEditor()}
 				<Preview value={this.props.value}/>

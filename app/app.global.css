@@ -1,10 +1,11 @@
 @import "~font-awesome/css/font-awesome.css";
-/*@import "~bootstrap/dist/css/bootstrap.css";*/
-/*@import "~simplemde/dist/simplemde.min.css";*/
 
 @import '~antd/dist/antd.css';
 @import "~codemirror/lib/codemirror.css";
+/*编辑器主题*/
 @import "~orgdown-editor/theme/orgdown.css";
+/*代码高亮主题*/
+@import '~orgdown-markdown/styles/github.css';
 
 @import '~mermaid/dist/mermaid.css';
 

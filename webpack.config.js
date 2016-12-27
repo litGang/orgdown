@@ -1,12 +1,13 @@
-import path from 'path';
-import webpack from "webpack";
+let path = require('path');
+let webpack = require('webpack');
+// import webpack from "webpack";
 import ExtractTextPlugin from "extract-text-webpack-plugin";
 
 const port = process.env.PORT || 3000;
 
 module.exports = {
-	debug: true,
-	devtool: 'eval-cheap-module-source-map',
+	debug: false,
+	devtool: 'inline-eval-cheap-source-map',
 
 	entry: [
 		`webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
@@ -63,7 +64,7 @@ module.exports = {
 		// }),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('development')
+			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
 		new ExtractTextPlugin('style.css', {allChunks: true})
 	],

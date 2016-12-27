@@ -81,6 +81,7 @@ class Editor extends Component {
 				</div>
 
 				<Orgdown key={this.props.currentDoc._id} onChange={_.debounce(this.onChangeContent.bind(this), 500)}
+					options={{value: this.props.currentDoc.content}}
 						 value={this.props.currentDoc.content}/>
 			</div>
 		);

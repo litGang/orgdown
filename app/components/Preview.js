@@ -1,6 +1,5 @@
 // @flow
 import React, {Component} from "react";
-import 'orgdown-markdown/styles/github.css';
 import {markdownRender} from "orgdown-markdown";
 
 class Preview extends Component {
