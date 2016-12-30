@@ -57,11 +57,11 @@ module.exports = {
 
 	plugins: [
 		// Minify the output
-		// new webpack.optimize.UglifyJsPlugin({
-		// 	compressor: {
-		// 		warnings: false
-		// 	}
-		// }),
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false
+			}
+		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
