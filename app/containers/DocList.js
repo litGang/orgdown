@@ -2,8 +2,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import { TreeSelect, Icon, Input } from 'antd';
-const Search = Input.Search;
+// import { TreeSelect, Icon, Input } from 'antd';
+// const Search = Input.Search;
+import Search from 'grommet/components/Search';
 import styles from "../styles/DocList.css";
 import {selectDoc, addDoc1, deleteDoc, sendAsEmail, exportToPdf} from "../actions/docs";
 import Doc from "../components/Doc";
@@ -25,11 +26,11 @@ class DocList extends Component {
                             </div>
                             {
                                 this.props.currentNotebook._id == 'allNote' ?
-                                    '' : <div className={styles.addDoc} onClick={this.props.addDoc}><Icon type="addfile" /></div>
+                                    '' : <div className={styles.addDoc} onClick={this.props.addDoc}><i type="addfile" /></div>
                             }
                         </div>
                         <div className="note-list-search">
-                            <Search className={styles.searchBox} placeholder="input search text" autosize={true} onSearch={value => console.log(value)} />
+                            <Search placeHolder='Search' inline={true} size='small' />
                         </div>
                         <div className="note-list-items">
                             <ul>

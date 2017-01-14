@@ -1,0 +1,11 @@
+.preview {
+    width: 0%;
+    height: calc(100vh - 128px);
+    border-left: 1px solid #ccc;
+    overflow-y: auto;
+    float: right;
+}
+
+.result {
+    margin: 10px;
+}

@@ -5,8 +5,8 @@ const window = require('./window');
 let menu;
 
 function init() {
-    menu = Menu.buildFromTemplate(getMenuTemplate());
-    Menu.setApplicationMenu(menu);
+    // menu = Menu.buildFromTemplate(getMenuTemplate());
+    // Menu.setApplicationMenu(menu);
 }
 
 function getMenuTemplate() {

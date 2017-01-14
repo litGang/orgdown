@@ -1,7 +1,13 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {TreeSelect, Icon} from "antd";
+// import {TreeSelect, Icon} from "antd";
+import TextInput from 'grommet/components/TextInput';
+import Select from 'grommet/components/Select';
+import PreviousIcon from 'grommet/components/icons/base/Previous';
+import NextIcon from 'grommet/components/icons/base/Next';
+import TrashIcon from 'grommet/components/icons/base/Trash';
+import Timestamp from 'grommet/components/Timestamp';
 import Orgdown from "../components/Orgdown";
 import {changeDoc, deleteDoc} from "../actions/docs";
 import _ from "lodash";
@@ -11,18 +17,18 @@ class Editor extends Component {
 		super(props, context);
 		this.state = {
 			title: '',
-			value: undefined
+			value: 'undefined'
 		};
 	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
-			title: nextProps.currentDoc.title
+			title: nextProps.currentDoc.title,
+			value: nextProps.currentDoc.content
 		})
 	}
 
 	onChangeNotebook(value) {
-		console.log(value);
 		this.setState({value});
 	}
 
@@ -41,16 +47,13 @@ class Editor extends Component {
 				<div className="orgdown-menubar" style={{height: this.props.height}}>
 					<div className="note-menu">
 						<div className="pages btn-group">
-							<a className="">
-								<Icon type="left"/>
-							</a>
-							<a className="">
-								<Icon type="right"/>
-							</a>
+							<PreviousIcon size="small" />
+							<NextIcon size="small" />
 						</div>
 						<div className="notebooks">
+							{/*<Select size="small" placeHolder='Search' />
 							<div className="dropdown">
-								<TreeSelect
+								<div
 									style={{width: 120}}
 									value={this.props.currentNotebook.text}
 									dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
@@ -59,14 +62,15 @@ class Editor extends Component {
 									treeDefaultExpandAll
 									onChange={this.onChangeNotebook.bind(this)}
 								/>
-							</div>
+							</div>*/}
 						</div>
 						{/*<div className="note-info">NOTE_INFO</div>*/}
-						<div
-							className="note-date">{this.props.currentDoc.updatedAt && this.props.currentDoc.updatedAt.toLocaleString()}</div>
+						<div className="note-date">
+								<Timestamp value={this.props.currentDoc.updatedAt || '2017-01-07T09:13:36.410Z'} />
+							</div>
 						<div className="delete">
 							<a className="" onClick={() => this.props.deleteDoc(this.props.currentDoc)}>
-								<Icon type="delete"/>
+								<TrashIcon size="small" />
 							</a>
 						</div>
 					</div>
@@ -74,7 +78,7 @@ class Editor extends Component {
 
 				<div className="orgdown-titlebar" style={{height: this.props.height}}>
 					<div className="orgdown-title">
-						<input type="text" className="orgdown-title-input"
+						<TextInput type="text" className="orgdown-title-input"
 							   placeholder="Untitled" onChange={this.updateTitle.bind(this)}
 							   value={this.state.title}/>
 					</div>
@@ -93,7 +97,7 @@ class Editor extends Component {
 			title: title
 		});
 		this.props.changeDoc({
-			docId: this.props.currentDoc._id,
+			_id: this.props.currentDoc._id,
 			title: title,
 			content: this.props.currentDoc.content
 		})
@@ -101,7 +105,7 @@ class Editor extends Component {
 
 	onChangeContent(value) {
 		this.props.changeDoc({
-			docId: this.props.currentDoc._id,
+			_id: this.props.currentDoc._id,
 			title: this.props.currentDoc.title,
 			content: value
 		})

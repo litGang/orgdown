@@ -12,7 +12,6 @@ export default function currentDoc(state: Object = initState.currentDoc, action:
         case 'ADD_DOC':
             return action.data.doc;
         case 'DOC_CHANGED':
-            // console.log(action.data);
             return action.data;
         default:
             return state;

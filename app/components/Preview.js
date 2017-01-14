@@ -1,27 +1,31 @@
 // @flow
 import React, {Component} from "react";
-import {markdownRender} from "orgdown-markdown";
+import render from "orgdown-markdown";
+import Section from 'grommet/components/Section';
+import Markdown from 'grommet/components/Markdown';
+import styles from '../styles/Preview.css'
 
 class Preview extends Component {
 	constructor(prop, context) {
 		super(prop, context);
 		this.state = {
-			html: ''
+			html: prop.value || ''
 		};
-		this.renderEngin = new markdownRender({element: '#preview'})
+		console.log(this.state.html)
+		// this.renderEngin = new markdownRender({element: '#preview'})
 	}
 
 	componentWillReceiveProps(nextProps) {
-		let html = this.renderEngin.makeHtml(nextProps.value);
+		let html = render(nextProps.value || '');
 		this.setState({
-			html: html
+			html: nextProps.value
 		});
 	}
 
 	render() {
 		return (
-			<div id="preview">
-				<div dangerouslySetInnerHTML={{__html: this.state.html}} />
+			<div id="preview" className={styles.preview}>
+				<Section><Markdown content={this.state.html} /></Section>
 			</div>
 		)
 

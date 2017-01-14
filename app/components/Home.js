@@ -1,6 +1,17 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import styles from "../styles/Home.css";
-import Sidebar from "../containers/Sidebar";
+// import Sidebar from "../containers/Sidebar";
+import Header from 'grommet/components/Header';
+import Title from 'grommet/components/Title';
+import Box from 'grommet/components/Box';
+import Menu from 'grommet/components/Menu';
+import Anchor from 'grommet/components/Anchor';
+import Footer from 'grommet/components/Footer';
+import Button from 'grommet/components/Button';
+import Sidebar from 'grommet/components/Sidebar';
+import User from 'grommet/components/icons/base/User';
+
+import App from 'grommet/components/App';
 import DocList from "../containers/DocList";
 import Editor from "../containers/Editor";
 
@@ -19,7 +30,7 @@ class Home extends Component {
 
     updateDimensions() {
         const windowWidth = window.innerWidth;
-        this.setState({'studioWidth': windowWidth - 460});
+        this.setState({ 'studioWidth': windowWidth - 460 });
     }
 
     componentDidMount() {
@@ -32,13 +43,41 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
+            <App centered={false}>
                 <div className={styles.container}>
-                    <Sidebar width={this.state.sidebarWidth}/>
-                    <DocList width={this.state.docsWidth}/>
-                    <Editor className="orgdown-studio" width={this.state.studioWidth}/>
+                    {/*<Sidebar width={this.state.sidebarWidth}/>*/}
+                    <Sidebar colorIndex='grey-4'
+                        fixed={false}
+                        size='small'>
+                        <Header pad='medium'
+                            justify='between'>
+                            <Title>
+                                Orgdown
+                            </Title>
+                        </Header>
+                        <Box flex='grow'
+                            justify='start'>
+                            <Menu primary={true}>
+                                <Anchor href='#'
+                                    className='active'>
+                                    知识库
+                                </Anchor>
+                                <Anchor href='#'>
+                                    Second
+                                </Anchor>
+                                <Anchor href='#'>
+                                    回收站
+                                </Anchor>
+                            </Menu>
+                        </Box>
+                        <Footer pad='medium'>
+                            <Button icon={<User />} />
+                        </Footer>
+                    </Sidebar>
+                    <DocList width={this.state.docsWidth} />
+                    <Editor className="orgdown-studio" width={this.state.studioWidth} />
                 </div>
-            </div>
+            </App>
         );
     }
 }

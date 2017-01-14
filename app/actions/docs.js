@@ -87,10 +87,9 @@ export function docChanged(curDoc) {
  */
 export function changeDoc(doc) {
     return (dispatch, getState) => {
-        let newDoc = getState().currentDoc;
-        Object.assign(newDoc, doc);
-        db.docs.update({_id: newDoc._id}, newDoc, function () {
-            dispatch(docChanged(newDoc))
+        // let newDoc = getState().currentDoc;
+        db.docs.update({_id: doc._id}, doc, function () {
+            dispatch(docChanged(doc))
         });
     }
 }

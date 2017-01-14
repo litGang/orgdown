@@ -2,7 +2,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {Modal, Button, Input, Cascader} from "antd";
+// import {Modal, Button, Input, Cascader} from "antd";
+import Button from 'grommet/components/Button';
+import Layer from 'grommet/components/Layer';
 import classNames from "classnames";
 import styles from "../styles/Sidebar.css";
 import NoteTree from "../components/NoteTree";
@@ -16,7 +18,7 @@ class Sidebar extends Component {
 			notebook: {
 				text: ''
 			},
-			visible: false,
+			visible: true,
 		};
 	}
 
@@ -60,8 +62,8 @@ class Sidebar extends Component {
 							</li>
 							<li className="notebook notebook-tree">
 								<div className="pull-right">
-									<Button onClick={() => this.noteBookSetting(true, null)}
-											className="add-note">Add</Button>
+									<Button plain={true} onClick={() => this.noteBookSetting(true, null)}
+											className="add-note" label="Add" />
 								</div>
 								<i className="fa fa-book"/>Notebooks
 							</li>
@@ -73,7 +75,7 @@ class Sidebar extends Component {
 						</ul>
 						<div className="layout-resizer layout-resizer-sidebar"></div>
 					</div>
-					<Modal title="Add Notebook"
+					{/*<Modal title="Add Notebook"
 						   visible={this.state.visible}
 						   onOk={this.handleOk.bind(this)}
 						   confirmLoading={this.state.confirmLoading}
@@ -85,6 +87,11 @@ class Sidebar extends Component {
 							this.setState(changedNote)}
 						} value={this.state.notebook.text} size="large" placeholder="Notebook name"/>
 					</Modal>
+					*/}
+
+					<Layer closer={true} flush={true} hidden={this.state.visible}>
+						<t />
+					</Layer>
 				</div>
 			</div>
 		);

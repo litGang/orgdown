@@ -21,7 +21,7 @@ function init() {
 		height: 600,
 		name: 'orgdown',
 		show: false,
-		// titleBarStyle: 'hidden-inset'
+		// titleBarStyle: 'hidden-inset',
 		webPreferences: {
 			webSecurity: false
 		}
@@ -29,11 +29,11 @@ function init() {
 
 	win.once('ready-to-show', () => {
 		show();
-		menu.enableItem('New Notebook');
+		// menu.enableItem('New Notebook');
 	});
 
 	// and load the index.html of the app.
-	win.loadURL(`file://${__dirname}/../app/app.html`);
+	win.loadURL(`file://${__dirname}/../src/index.html`);
 	// win.loadURL(`file://${path.resolve(__dirname, '../app/app.html')}`);
 
 	// Open the DevTools.
@@ -44,7 +44,7 @@ function init() {
 		win = main.win = null;
 		mainMsgQueue.length = 0;
 		app.mainRenderReady = false;
-		menu.onNoMainWin();
+		// menu.onNoMainWin();
 	})
 }
 

@@ -12,7 +12,7 @@ module.exports = {
 	entry: [
 		`webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
 		'babel-polyfill',
-		'./app'
+		'./src/js'
 	],
 	output: {
 		path: path.join(__dirname, 'dist'),
@@ -46,6 +46,10 @@ module.exports = {
 					'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
 				]
 			},
+			{
+				test: /\.scss$/,
+				loaders: ["style-loader", "css-loader", "sass-loader"]
+			},
 			{test: /\.json/, loader: "json-loader"},
 			{test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
 			{test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
@@ -57,11 +61,11 @@ module.exports = {
 
 	plugins: [
 		// Minify the output
-		new webpack.optimize.UglifyJsPlugin({
-			compressor: {
-				warnings: false
-			}
-		}),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	compressor: {
+		// 		warnings: false
+		// 	}
+		// }),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
