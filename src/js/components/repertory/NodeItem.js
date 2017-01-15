@@ -3,7 +3,21 @@ import Tile from "grommet/components/Tile";
 import FolderIcon from 'grommet/components/icons/base/Folder';
 import NotesIcon from 'grommet/components/icons/base/Notes';
 
+import {remote} from "electron";
+const {Menu, MenuItem, shell} = remote;
+
 class NodeItem extends Component {
+
+    constructor(props, context) {
+        super(props, context)
+        this.menu = new Menu();
+		this.menu.append(new MenuItem({
+			label: 'Delete Document', click() {
+				props.deleteDoc(props.data);
+				// props.deleteNote(props);
+			}
+		}));
+    }
 
     _onDragStart(item) {
         return (event) => {
@@ -30,10 +44,14 @@ class NodeItem extends Component {
         }
     }
 
+    _onContextMenu() {
+        this.menu.popup(remote.getCurrentWindow());
+    }
+
     render() {
         const {node} = this.props;
         return (
-            <Tile wide={false} onDragStart={this._onDragStart(node)} onDragOver={this._onDragOver(node)}
+            <Tile onContextMenu={this._onContextMenu.bind(this)} wide={false} onDragStart={this._onDragStart(node)} onDragOver={this._onDragOver(node)}
                 onDragEnter={this._onDragEnter(node)} onDrop={this._onDrop(node)}
                 onClick={this.props.onClick}
                 draggable={true} align="center" pad="small" direction="column" size="small"

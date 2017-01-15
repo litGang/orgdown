@@ -48,14 +48,14 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-				loaders: ["style-loader", "css-loader", "sass-loader"]
+				loader: 'style!css!sass?outputStyle=expanded&' + 'includePaths[]=' + (encodeURIComponent(path.resolve('./node_modules')))
 			},
-			{test: /\.json/, loader: "json-loader"},
-			{test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
-			{test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
-			{test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-			{test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
-			{test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
+			{ test: /\.json/, loader: "json-loader" },
+			{ test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+			{ test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+			{ test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
+			{ test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+			{ test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
 		]
 	},
 
@@ -70,7 +70,7 @@ module.exports = {
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
-		new ExtractTextPlugin('style.css', {allChunks: true})
+		new ExtractTextPlugin('style.css', { allChunks: true })
 	],
 
 	target: 'electron-main',

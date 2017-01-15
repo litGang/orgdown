@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
 	viewNode, loadNotes, addNode, chageDirectory
 } from '../../actions/note';
-import {hashHistory} from "react-router";
+import { hashHistory } from "react-router";
 import Box from "grommet/components/Box";
 import Header from "grommet/components/Header";
 import Title from "grommet/components/Title";
@@ -28,21 +28,26 @@ const LAYERS = {
 
 class RepertoryIndex extends Component {
 
-	constructor(prop, context) {
-		super(prop, context);
+	constructor(props, context) {
+		super(props, context);
 		this._onSearch = this._onSearch.bind(this);
 		this._onMore = this._onMore.bind(this);
 		this._onLayerOpen = this._onLayerOpen.bind(this);
 		this._onLayerClose = this._onLayerClose.bind(this);
 		this.state = { searchText: '', layerName: undefined };
+
+		const { router } = context;
+		console.log(router)
 	}
 
 	componentDidMount() {
 		var nodeId = this.props.params.nodeId;
+		console.log(nodeId)
 		this.props.dispatch(chageDirectory(nodeId));
 	}
 
 	componentWillUnmount() {
+		console.log('componentWillUnmount')
 		// this.props.dispatch(unloadIndex());
 	}
 
@@ -74,11 +79,12 @@ class RepertoryIndex extends Component {
 		return () => {
 			let nodeType = node.type;
 			if ('folder' === nodeType) {
-				// this.props.dispatch(chageDirectory(node._id));
+				hashHistory.push({
+					pathname: `/repertory/${node._id}`,
+				});
 			} else if ('file' === nodeType) {
 				hashHistory.push({
 					pathname: `/note/${node._id}`,
-					search: document.location.search
 				});
 			}
 		};
@@ -137,6 +143,10 @@ class RepertoryIndex extends Component {
 RepertoryIndex.propTypes = {
 	node: PropTypes.object
 };
+
+RepertoryIndex.contextTypes = {
+    router: Object
+}
 
 let select = (state) => {
 	return ({

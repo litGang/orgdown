@@ -1,6 +1,7 @@
 export const INDEX_SELECT = 'INDEX_SELECT';
 export const NOTE_LOAD_SUCCESS = 'NOTE_LOAD_SUCCESS';
 export const LOAD_NOTE = 'LOAD_NOTE';
+export const NODE_CHANGE = 'NODE_CHANGE';
 export const CHANGE_DIRECTORY = 'CHANGE_DIRECTORY';
 import { Router, hashHistory as history } from "react-router";
 import db from "../../../main/database";
@@ -54,5 +55,16 @@ export function chageDirectory(repoId, sort) {
 				data: nodes
 			});
 		});
+	}
+}
+
+export function nodeChange(node) {
+	return function (dispatch) {
+		db.nodes.update({_id: node._id}, node, function () {
+            dispatch({
+				type: NODE_CHANGE,
+				data: node
+			});
+        });
 	}
 }

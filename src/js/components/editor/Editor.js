@@ -7,12 +7,8 @@ import classNames from "classnames/bind";
 import { editor } from "orgdown-editor";
 import ToolBar from "./ToolBar";
 import Box from "grommet/components/Box";
-import Header from "grommet/components/Header";
-import Anchor from "grommet/components/Anchor";
-import Menu from "grommet/components/Menu";
-import Actions from "grommet/components/icons/base/Actions";
-import LinkPreviousIcon from "grommet/components/icons/base/LinkPrevious";
-import TextInput from "grommet/components/TextInput";
+import Split from 'grommet/components/Split';
+import Preview from './Preview';
 
 class Editor extends Component {
 	constructor(prop, context) {
@@ -41,10 +37,6 @@ class Editor extends Component {
 		this.editor.codemirror.refresh();
 	}
 
-	changeViewMode(mode) {
-
-	}
-
 	componentWillMount() {
 		this.id = "orgdown-markdown";
 	}
@@ -56,7 +48,7 @@ class Editor extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (!this.state.keyChange) {
+		if (!this.state.keyChange && this.editor.getValue() === '') {
 			this.editor.setValue(nextProps.sketch.content || '')
 		}
 
@@ -84,7 +76,7 @@ class Editor extends Component {
 			keyChange: true
 		});
 		let value = this.editor.getValue();
-		this.props.onChange(value);
+		this.props.onChange({ content: value });
 	}
 
 	removeEvents() {
@@ -110,7 +102,12 @@ class Editor extends Component {
 
 	renderEditor() {
 		const textarea = React.createElement('textarea', { id: this.id });
-		return React.createElement('div', { id: `${this.id}-wrapper`, style: { height: '100%' } }, textarea);
+		// return React.createElement('div', { id: `${this.id}-wrapper`, style: { height: '100%' } }, textarea);
+		return (
+			<Box id={`${this.id}-wrapper`} pad={{ horizontal: 'small' }} style={{height: '100%'}} wrap={true}>
+				{textarea}
+			</Box>
+		)
 	}
 
 	render() {
@@ -119,29 +116,15 @@ class Editor extends Component {
 			'sideBySide': this.state.sideBySide
 		});
 		return (
-			<Box flex={true} full={true} justify='start' direction='column'>
-				<Header size='small' pad='small' justify="between">
-					<Anchor icon={<LinkPreviousIcon />} path="/" a11yTitle="Return" />
-					<Box>
-						<TextInput id="noteTitle" style={{ border: 0, width: '100%' }} value={this.props.sketch.name} />
-					</Box>
-					<Box flex={true} justify='end' direction='row' responsive={false}>
-						<Menu icon={<Actions />}
-							dropAlign={{ "right": "right" }}>
-							<Anchor href='#' className='active'>First</Anchor>
-							<Anchor href='#'>Second</Anchor>
-							<Anchor href='#'>Third</Anchor>
-						</Menu>
-					</Box>
-				</Header>
+			<Box flex={true}>
 				<Box>
 					<ToolBar toggle={this.toggle} />
 				</Box>
-				<Box flex={true} pad="small" fill={true} justify='stretch'>
-					<div className={viewMode} style={{ height: '100%' }}>
+				<Box flex={true} wrap={true}>
+					<Split flex='both' wrap={true} fixed={false} separator={true} style={{height: '100%'}}>
 						{this.renderEditor()}
-						{/*<Preview value={this.props.value} />*/}
-					</div>
+						{this.state.sideBySide ? <Preview value={this.props.sketch.content} /> : ''}
+					</Split>
 				</Box>
 			</Box>
 		)
@@ -153,10 +136,4 @@ Editor.defaultProps = {
 	options: PropTypes.object
 };
 
-let select = (state) => {
-	return ({
-		sketch: state.sketch
-	})
-};
-
-export default connect(select)(Editor);
+export default Editor;

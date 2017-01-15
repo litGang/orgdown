@@ -32,6 +32,7 @@ store.dispatch(sessionInitialize(window.location.pathname));
 const history = syncHistoryWithStore(hashHistory, store);
 // listen for history changes and initiate routeChanged actions for them
 history.listen((location) => {
+	console.log(location)
 	// const publish = store.getState().session.publishRoute;
 	// store.dispatch(routeChanged(location, publish));
 });
