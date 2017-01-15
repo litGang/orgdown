@@ -1,11 +1,10 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
-
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { changeSettings } from '../../actions/actions';
 import LayerForm from 'grommet-templates/components/LayerForm';
 import Paragraph from 'grommet/components/Paragraph';
 import FormField from 'grommet/components/FormField';
+import Select from 'grommet/components/Select';
 
 class RepertoryAddForm extends Component {
 
@@ -60,19 +59,31 @@ class RepertoryAddForm extends Component {
 		const { settings, errors } = this.state;
 
 		return (
-			<LayerForm title="Add new" submitLabel="OK"
-				onClose={this.props.onClose} onSubmit={this._onSubmit}>
+			<LayerForm title="New" submitLabel="Add" onClose={this.props.onClose} onSubmit={this._onSubmit}>
 				<Paragraph>
 					Your {productName + "'s"} name and identity on the network.
-			</Paragraph>
+				</Paragraph>
 				<fieldset>
-					<FormField htmlFor="name" label="Name" error={errors.name}
-						help="Typically the vCenter cluster name but can be anything.">
+					<FormField htmlFor="name" label="Name" error={errors.name}>
 						<input id="name" name="name" type="text"
 							value={settings.name || ''} onChange={this._onChange} />
 					</FormField>
 				</fieldset>
 
+				<fieldset>
+					<FormField htmlFor="resourceType" label="resource type" >
+						<Select id='resourceType' placeHolder='Search'
+							options={['directory', 'file']}
+							value={'directory'}
+							onChange={this._onChange} />
+					</FormField>
+				</fieldset>
+				<fieldset>
+					<FormField htmlFor="dataCenter" label="Data center" >
+						<input id="dataCenter" name="dataCenter" type="text"
+							value={settings.dataCenter || ''} onChange={this._onChange} />
+					</FormField>
+				</fieldset>
 				<fieldset>
 					<FormField htmlFor="dataCenter" label="Data center" >
 						<input id="dataCenter" name="dataCenter" type="text"

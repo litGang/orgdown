@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
 import {
-  initEditor
+	initEditor
 } from '../../actions/sketch';
 
 import Editor from "./Editor";
@@ -13,14 +13,14 @@ class Studio extends Component {
 	}
 
 	componentDidMount() {
-		var sketchId = this.props.params.noteId;
+		var nodeId = this.props.params.nodeId;
 		// load init sketch
-		this.props.dispatch(initEditor(sketchId));
+		this.props.dispatch(initEditor(nodeId));
 
 		document.title = this.props.sketch.name;
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		document.title = 'orgdown';
 	}
 

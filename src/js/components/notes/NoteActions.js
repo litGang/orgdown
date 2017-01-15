@@ -25,32 +25,12 @@ class NoteActions extends Component {
 
 	constructor(props) {
 		super(props);
-		this._onEdit = this._onEdit.bind(this);
 		this._onLayerOpen = this._onLayerOpen.bind(this);
 		this._onLayerClose = this._onLayerClose.bind(this);
-		this._onPowerOn = this._onPowerOn.bind(this);
 
 		this.state = {
 			layerName: undefined
 		};
-	}
-
-	_onEdit() {
-		const {busy, note} = this.props;
-		const {router} = this.context;
-		if (busy) {
-			this.setState({ layerName: 'busy' });
-		} else if ('Online' === note.state) {
-			this.setState({ layerName: 'online' });
-		} else {
-			router.push({
-				pathname: `/editor/${note._id}`,
-				search: document.location.search
-			});
-			if (this.props.onClose) {
-				this.props.onClose();
-			}
-		}
 	}
 
 	//
@@ -65,17 +45,6 @@ class NoteActions extends Component {
 		}
 	}
 
-	_onPowerOn() {
-		if (this.props.busy) {
-			this.setState({ layerName: 'busy' });
-		} else {
-			// this.props.dispatch(powerOnVm(this.props.note.uri));
-			if (this.props.onClose) {
-				this.props.onClose();
-			}
-		}
-	}
-
 	render() {
 		const {note, onClose} = this.props;
 
@@ -84,13 +53,12 @@ class NoteActions extends Component {
 		if (onClose) {
 			name = <Heading tag="h3" margin='none'>{note.title}</Heading>;
 			closeControl = (
-				<Button icon={<CloseIcon />} onClick={onClose}
-					a11yTitle={`Close ${note.title}`} />
+				<Button icon={<CloseIcon />} onClick={onClose} a11yTitle={`Close ${note.title}`} />
 			);
 		}
 
 		let stateControls;
-		if (true || 'Online' === note.state) {
+		if (true) {
 			stateControls = [
 				<Button key="edit" align="start" plain={true}
 					icon={<EditIcon />} label="Edit" path={`/editor/${note._id}`} />,
@@ -107,8 +75,7 @@ class NoteActions extends Component {
 		} else {
 			stateControls = (
 				<Button align="start" plain={true}
-					icon={<PowerIcon />} label="Power On"
-					onClick={this._onPowerOn} />
+					icon={<PowerIcon />} label="Power On"/>
 			);
 		}
 

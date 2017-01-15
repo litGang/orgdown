@@ -47,7 +47,7 @@ class NoteIndex extends Component {
 	}
 
 	componentDidMount() {
-		this.props.dispatch(loadNotes('updatedAt:desc'));
+		// this.props.dispatch(loadNotes('updatedAt:desc'));
 	}
 
 	componentWillUnmount() {
@@ -184,7 +184,7 @@ class NoteIndex extends Component {
 				<Header size='large' pad={{horizontal: 'medium'}}>
 					<Title responsive={false}>
 						<NavControl />
-						<span>知识库</span>
+						<span>Dashboard</span>
 					</Title>
 					<Search inline={true} fill={true} size='medium' placeHolder='Search'
 							value={searchText} onDOMChange={this._onSearch}/>

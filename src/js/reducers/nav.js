@@ -15,22 +15,13 @@ const initialState = {
 	responsive: 'multiple',
 	peek: false,
 	items: [
-		{
-			path: '/dashboard', label: '首页',
-			excludeRole: 'virtualization user'
-		},
-		{path: '/repertory', label: '知识库'},
-		{path: '/activity', label: '标签库'},
+		{path: '/', label: '首页', excludeRole: 'virtualization user'},
+		{path: '/repertory/root', label: '知识库'},
+		{path: '/tag', label: '标签库'},
 		{path: '/editor', label: '文档'},
 		{path: '/login', label: '备份', excludeRole: 'virtualization user'},
-		{
-			path: '/virtual-machine-sizes', label: '发布文章',
-			excludeRole: 'virtualization user'
-		},
-		{
-			path: '/settings/edit', label: '设置',
-			excludeRole: 'virtualization user'
-		}
+		{path: '/trash', label: '回收站', excludeRole: 'virtualization user'},
+		{path: '/settings/edit', label: '设置', excludeRole: 'virtualization user'}
 	]
 };
 

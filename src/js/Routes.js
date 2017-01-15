@@ -14,9 +14,9 @@ export let routes = [
 	{
 		path: '/', component: Orgdown, indexRoute: {component: NoteIndex},
 		childRoutes: [
-			{path: 'repertory', component: RepertoryIndex},
-			{path: 'note', component: NoteShow},
-			{path: 'editor/:noteId', component: Studio},
+			{path: 'repertory/:nodeId', component: RepertoryIndex},
+			{path: 'note/:nodeId', component: NoteShow},
+			{path: 'editor/:nodeId', component: Studio},
 			{path: 'login', component: Login},
 		]
 	}

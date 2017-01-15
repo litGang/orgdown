@@ -2,8 +2,8 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { loadItem
-} from '../../actions/actions';
+import {hashHistory} from "react-router";
+import { viewNode } from '../../actions/actions';
 import Split from 'grommet/components/Split';
 import Article from 'grommet/components/Article';
 import Markdown from 'grommet/components/Markdown';
@@ -18,17 +18,12 @@ import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import LinkPreviousIcon from 'grommet/components/icons/base/LinkPrevious';
 import MoreIcon from 'grommet/components/icons/base/More';
-// import Notifications from '../Notifications';
-// import VirtualMachineActivity from './VirtualMachineActivity';
-// import VirtualMachineSnapshots from './VirtualMachineSnapshots';
-// import VirtualMachineMetrics from './VirtualMachineMetrics';
-// import VirtualMachineActions from './VirtualMachineActions';
 
 import NoteActions from './NoteActions';
 
 class NoteShow extends Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
 		this._onResponsive = this._onResponsive.bind(this);
 		this._onToggleSidebar = this._onToggleSidebar.bind(this);
@@ -39,152 +34,43 @@ class NoteShow extends Component {
 		};
 	}
 
-	componentDidMount () {
-		this.props.dispatch(loadItem(this.props.uri));
+	componentDidMount() {
+		var nodeId = this.props.params.nodeId;
+		// load init sketch
+		this.props.dispatch(viewNode(nodeId));
+
+		document.title = this.props.note.name;
+		// this.props.dispatch(loadItem(this.props.uri));
 	}
 
-	componentWillReceiveProps (nextProps) {
+	componentWillReceiveProps(nextProps) {
 		if (nextProps.note) {
 			document.title = nextProps.note.name;
 		}
-		if (this.props.uri !== nextProps.uri) {
-			// have to unload snapshots first!
-			// this.props.dispatch(unloadVmSnapshots());
-			// // unloadItem unloads activity
-			//
-			// // TODO: remove? will load function take care of unloading?
-			// // this.props.dispatch(unloadItem());
-			//
-			// this.props.dispatch(loadItem(nextProps.uri));
-			// this.props.dispatch(loadItemActivity(nextProps.uri));
-			// this.props.dispatch(loadVmSnapshots(nextProps.uri));
-		}
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		document.title = 'orgdown';
 		// have to unload snapshots first!
 		// this.props.dispatch(unloadVmSnapshots());
 		// this.props.dispatch(unloadItem());
 	}
 
-	_onResponsive (responsive) {
+	_onResponsive(responsive) {
 		// this.props.dispatch(vmResponsive(responsive));
 	}
 
-	_onToggleSidebar () {
+	_onToggleSidebar() {
 		this.setState({
-			showSidebarWhenSingle: ! this.state.showSidebarWhenSingle
+			showSidebarWhenSingle: !this.state.showSidebarWhenSingle
 		});
 	}
 
-	// _renderActivity () {
-	// 	let { someActivity, moreActivity } = this.props;
-	// 	let result;
-	// 	if (someActivity) {
-	// 		let allActivity;
-	// 		if (moreActivity) {
-	// 			const query = `associatedResourceUri:${this.props.uri}`;
-	// 			const path = `/activity?q=${encodeURIComponent(query)}`;
-	// 			allActivity = (
-	// 				<Box pad="medium">
-	// 					<Anchor path={path}>All activity</Anchor>
-	// 				</Box>
-	// 			);
-	// 		}
-	// 		result = (
-	// 			<Section pad={{vertical: 'medium'}} full="horizontal">
-	// 				<Box pad={{horizontal: 'medium'}}>
-	// 					<Heading tag="h2">Activity</Heading>
-	// 				</Box>
-	// 				<VirtualMachineActivity uri={this.props.uri} />
-	// 				{allActivity}
-	// 			</Section>
-	// 		);
-	// 	}
-	// 	return result;
-	// }
-
-	// _renderSnapshots () {
-	// 	let { someSnapshots } = this.props;
-	// 	let result;
-	// 	if (someSnapshots) {
-	// 		result = (
-	// 			<Section pad={{vertical: 'medium'}} full="horizontal">
-	// 				<Box pad={{horizontal: 'medium'}}>
-	// 					<Heading tag="h2">Snapshots</Heading>
-	// 				</Box>
-	// 				<VirtualMachineSnapshots />
-	// 			</Section>
-	// 		);
-	// 	}
-	// 	return result;
-	// }
-
-	// _renderAddresses () {
-	// 	const { virtualMachine } = this.props;
-	// 	let addresses = [];
-	// 	virtualMachine.networks.forEach(network => {
-	// 		network.addresses.forEach(address => {
-	// 			addresses.push(
-	// 				<ListItem key={address}
-	// 						  separator={addresses.length === 0 ? 'horizontal' : 'bottom'}>
-	// 					{address}
-	// 				</ListItem>
-	// 			);
-	// 		});
-	// 	});
-	// 	return (
-	// 		<Section pad={{vertical: 'medium'}} full="horizontal">
-	// 			<Box pad={{horizontal: 'medium'}}>
-	// 				<Heading tag="h2">IP Addresses</Heading>
-	// 			</Box>
-	// 			<List>
-	// 				{addresses}
-	// 			</List>
-	// 		</Section>
-	// 	);
-	// }
-
-	render () {
+	render() {
 		const { note } = this.props;
 
-		// let state;
-		// if (! notifications.alert && ! notifications.aggregate &&
-		// 	! notifications.tasks) {
-		// 	state = (
-		// 		<Section full="horizontal" pad="none">
-		// 			<Notification pad="medium" status={virtualMachine.status}
-		// 						  message={virtualMachine.state || ''} />
-		// 		</Section>
-		// 	);
-		// }
-		// let metrics, addresses;
-		// if ('Online' === virtualMachine.state) {
-		// 	metrics = (
-		// 		<VirtualMachineMetrics virtualMachine={virtualMachine}
-		// 							   nav={nav} />
-		// 	);
-		// 	addresses = this._renderAddresses();
-		// }
-		// let activity = this._renderActivity();
-		// let snapshots = this._renderSnapshots();
-
 		let sidebar;
-		let sidebarControl;
-		// if ('read only' !== role) {
-			let onSidebarClose;
-		// 	if ('single' === this.props.responsive) {
-		// 		sidebarControl = (
-		// 			<Button icon={<MoreIcon />} onClick={this._onToggleSidebar} />
-		// 		);
-				onSidebarClose = this._onToggleSidebar;
-		// 	}
-		// 	sidebar = (
-		// 		<VirtualMachineActions category={category}
-		// 							   virtualMachine={virtualMachine} onClose={onSidebarClose} />
-		// 	);
-		// }
+		let onSidebarClose = this._onToggleSidebar;
 
 		sidebar = (
 			<NoteActions note={note} onClose={onSidebarClose} />
@@ -192,30 +78,22 @@ class NoteShow extends Component {
 
 		return (
 			<Split flex="left" separator={true}
-				   priority={this.state.showSidebarWhenSingle ? 'right' : 'left'}
-				   onResponsive={this._onResponsive}>
-
+				priority={this.state.showSidebarWhenSingle ? 'right' : 'left'}
+				onResponsive={this._onResponsive}>
 				<div>
-					<Header pad={{horizontal: "small", vertical: "medium"}}
-							justify="start" size="large" colorIndex="light-2">
-						<Box direction="row" align="center" pad={{between: 'small'}}
-							 responsive={false}>
-							<Anchor icon={<LinkPreviousIcon />} path="/"
-									a11yTitle="Return" />
+					<Header pad={{ horizontal: "small", vertical: "medium" }}
+						justify="start" size="large" colorIndex="light-2">
+						<Box direction="row" align="center" pad={{ between: 'small' }}
+							responsive={false}>
+							<Anchor icon={<LinkPreviousIcon />} onClick={hashHistory.goBack}
+								a11yTitle="Return" />
 							<Heading tag="h1" margin="none">
 								<strong>{note.name}</strong>
 							</Heading>
 						</Box>
-						{/*{sidebarControl}*/}
 					</Header>
 					<Article pad="medium" align="start" primary={true}>
 						<Markdown content={note.content} />
-						{/*{state}*/}
-						{/*<Notifications context={{uri: virtualMachine.uri}} />*/}
-						{/*{metrics}*/}
-						{/*{activity}*/}
-						{/*{snapshots}*/}
-						{/*{addresses}*/}
 					</Article>
 				</div>
 				{sidebar}
@@ -235,27 +113,8 @@ NoteShow.propTypes = {
 };
 
 let select = (state, props) => {
-	/// Why do we need this? Can't we hard code it?
-	// const category = state.route.location.pathname.split('/')[1];
-	// let someActivity = (state.item.activity && state.item.activity.total > 0);
-	// let moreActivity = (state.item.activity &&
-	// state.item.activity.total > state.item.activity.count);
-	// let someSnapshots = (state.vm.snapshots.total > 0);
 	return {
-	// 	busy: state.notifications.busy,
-	// 	category: category,
-	// 	closePath: '/' + category + document.location.search,
 		note: state.note,
-	// 	moreActivity: moreActivity,
-	// 	nav: state.nav,
-	// 	notifications: state.notifications,
-	// 	responsive: state.vm.responsive,
-	// 	role: state.session.role,
-	// 	someSnapshots: someSnapshots,
-	// 	someActivity: someActivity,
-	// 	uri: '/' + props.params.splat,
-	// 	virtualMachine: state.item.item || {},
-	// 	vm: state.vm
 	};
 };
 
