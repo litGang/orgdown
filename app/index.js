@@ -31,6 +31,4 @@ db.notebooks.find({}).sort({ createdAt: 1 }).exec(function (err, datas) {
 
 });
 
-// import aaa from './reducers/initState';
-// db.notebooks.insert(aaa);
 let notebooks = {};
