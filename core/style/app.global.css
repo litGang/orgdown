@@ -4,13 +4,22 @@
 html, body {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
 }
 
 *:focus {
     outline: none;
 }
 
-#content {
+#application {
+    display: flex;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
     height: 100%;
 }
 
@@ -25,15 +34,16 @@ html, body {
 }
 
 .orgdown-sidebar {
+    min-width: 200px;
+    max-width: 300px;
     background: #182026;
 }
 .orgdown-doclist {
+    min-width: 300px;
+    max-width: 500px;
     background: #EBF1F5;
 }
 .orgdown-editor {
     display: flex;
-    justify-content: flex-end;
-    width: 800px;
-    height: 600px;
     background: #ffffff;
 }

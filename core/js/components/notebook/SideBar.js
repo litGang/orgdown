@@ -42,7 +42,7 @@ class SideBar extends Component {
 
     render() {
         return (
-            <div className='orgdown-sidebar'>
+            <div className='orgdown-sidebar flex-item'>
                 <h1>SideBar</h1>
                 <Tree
                 contents={this.state.nodes}

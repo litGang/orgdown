@@ -6,7 +6,7 @@ import Editor from '../editor/Editor'
 class NoteBook extends Component {
     render() {
         return (
-            <div className='orgdown-notebook'>
+            <div className='orgdown-notebook flex-container'>
                 <SideBar />
                 <DocList />
                 <Editor />
