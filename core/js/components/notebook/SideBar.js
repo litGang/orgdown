@@ -13,44 +13,32 @@ class SideBar extends Component {
                 },
                 {
                     iconName: "folder-close",
+                    label: 'Java',
+                    isSelected: true,
                     isExpanded: true,
-                    label: <Tooltip content="I'm a folder <3">Folder 1</Tooltip>,
-                    childNodes: [
-                        { iconName: "document", label: "Item 0", secondaryLabel: '12313' },
-                        { iconName: "pt-icon-tag", label: '123123' },
-                        {
-                            hasCaret: true,
-                            iconName: "pt-icon-folder-close",
-                            childNodes: [
-                                { label: "No-Icon Item" },
-                                { iconName: "pt-icon-tag", label: "Item 1" },
-                                {
-                                    hasCaret: true, iconName: "pt-icon-folder-close", label: "Folder 3",
-                                    childNodes:  [
-                                        { iconName: "document", label: "Item 0" },
-                                        { iconName: "pt-icon-tag", label: "Item 1" },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                },
+                    childNodes: [{
+                        iconName: 'folder-close',
+                        label: 'JVM调优'
+                    }]
+                }
             ],
         }
     }
-    
+
 
     render() {
         return (
-            <div className='orgdown-sidebar flex-item'>
-                <h1>SideBar</h1>
+            <div className='orgdown-sidebar'>
+                <div className='logo'>
+                    Orgdown1
+                </div>
                 <Tree
-                contents={this.state.nodes}
-                onNodeClick={() => console.log('onNodeClick')}
-                onNodeCollapse={() => console.log('onNodeCollapse')}
-                onNodeExpand={() => console.log('onNodeExpand')}
-                className={Classes.ELEVATION_0}
-            />
+                    contents={this.state.nodes}
+                    onNodeClick={(node, event) => console.log(node, event)}
+                    onNodeCollapse={() => console.log('onNodeCollapse')}
+                    onNodeExpand={() => console.log('onNodeExpand')}
+                    className={Classes.ELEVATION_0}
+                />
             </div>
         )
     }

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        html,
+        body,
+        .viewport {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        
+        .vbox {
+            /* previous syntax */
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            -ms-box-orient: vertical;
+            box-orient: vertical;
+            /* current syntax */
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            -moz-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+        /* items flex/expand horizontally */
+        
+        .hbox {
+            /* previous syntax */
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-box;
+            display: box;
+            -webkit-box-orient: horizontal;
+            -moz-box-orient: horizontal;
+            -ms-box-orient: horizontal;
+            box-orient: horizontal;
+            /* current syntax */
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            -moz-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+        
+        .space-between {
+            /* previous syntax */
+            -webkit-box-pack: justify;
+            -moz-box-pack: justify;
+            -ms-box-pack: justify;
+            box-pack: justify;
+            /* current syntax */
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+            justify-content: space-between;
+        }
+        
+        .titlebar {
+            background: red;
+            height: 20px;
+        }
+        
+        .container {
+            /* previous syntax */
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            -ms-box-flex: 1;
+            box-flex: 1;
+            /* current syntax */
+            -webkit-flex: 1;
+            -moz-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+        
+        .orgdown-editor {
+            /* previous syntax */
+            -webkit-box-flex: 5;
+            -moz-box-flex: 5;
+            -ms-box-flex: 5;
+            box-flex: 5;
+            /* current syntax */
+            -webkit-flex: 5;
+            -moz-flex: 5;
+            -ms-flex: 5;
+            flex: 5;
+        }
+        
+        .orgdown-doclist,
+        .orgdown-sidebar {
+            /* previous syntax */
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            -ms-box-flex: 1;
+            box-flex: 1;
+            /* current syntax */
+            -webkit-flex: 1;
+            -moz-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+
+        
+    </style>
+</head>
+
+<body class="vbox viewport">
+    <div class='titlebar'>Header</div>
+    <section class="container hbox space-between">
+        <div class='orgdown-sidebar'>
+            <div class="logo">
+                Orgdown
+            </div>
+            <div class="tree">
+                <ul>
+                    <li><a href="12313131">jfskalfjwe</a></li>
+                    <li><a href="12313131">sdkfjklwejf</a></li>
+                    <li><a href="12313131">sdkfjklwejf</a></li>
+                    <li><a href="12313131">sdkfjklwejf</a></li>
+                    <li><a href="12313131">sdkfjklwejf</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class='orgdown-doclist'>Aside</div>
+        <div class='orgdown-editor'>Article</div>
+    </section>
+</body>
+
+</html>

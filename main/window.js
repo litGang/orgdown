@@ -17,11 +17,11 @@ function init() {
 	}
 
 	let win = main.win = new BrowserWindow({
-		width: 1000,
-		height: 600,
+		width: 1600,
+		height: 768,
 		name: 'orgdown',
 		show: false,
-		// titleBarStyle: 'hidden-inset',
+		titleBarStyle: 'hidden',
 		webPreferences: {
 			webSecurity: false
 		}
