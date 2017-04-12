@@ -6,8 +6,8 @@ const port = process.env.PORT || 3000;
 module.exports = {
     entry: [
         `webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
-		'babel-polyfill',
-        "./core/js/",
+		    'babel-polyfill',
+        "./src/js/",
     ],
     output: {
         filename: "bundle.js",
