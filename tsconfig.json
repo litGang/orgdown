@@ -4,10 +4,11 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
+        "experimentalDecorators": true,
         "target": "es5",
         "jsx": "react"
     },
     "include": [
-        "./core/**/*"
+        "./src/**/*"
     ]
 }
