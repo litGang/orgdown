@@ -11,7 +11,6 @@ export function loadNotes(sort) {
 			dispatch({
 				type: NOTE_LOAD_SUCCESS,
 				data: {
-					docs: docs,
 					sort: sort
 				}
 			});
