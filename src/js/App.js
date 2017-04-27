@@ -4,11 +4,11 @@ import { Provider } from "react-redux";
 import { HashRouter } from 'react-router-dom';
 import store from "./store";
 
-import Orgdown from './components/Orgdown';
+import Notebook from './containers/Notebook';
 import '../style/app.global.css'
 
 export default () => (
   <Provider store={store}>
-      <Orgdown />
+      <Notebook />
   </Provider>
 );
