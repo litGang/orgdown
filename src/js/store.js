@@ -7,4 +7,4 @@ import docs from './reducers/docs';
 
 export default compose(
   applyMiddleware(thunk)
-)(createStore)(combineReducers({ routing, nodes, docs }));
+)(createStore)(combineReducers({ nodes, docs }));
