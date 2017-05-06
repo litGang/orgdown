@@ -1,0 +1,140 @@
+@import '~@blueprintjs/core/dist/blueprint.css';
+@import './resizer.scss';
+* {
+    outline: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light, Ubuntu, Droid Sans, sans-serif;
+}
+
+.orgdown-sidebar {
+    height: 100%;
+    color: #fff;
+    background: rgb(42, 42, 42);
+    display: flex;
+    flex-direction: column;
+    -webkit-app-region: drag;
+    .baner {
+        padding: 5px 10px;
+        color: #ccc;
+        font-weight: bold;
+        -webkit-user-select: none;
+    }
+    .orgdown-treeview {
+        margin-top: 30px;
+        flex: 1;
+    }
+    .orgdown-userinfo {
+        line-height: 50px;
+        height: 50px;
+        padding: 0 20px;
+    }
+}
+
+.orgdown-sidebar .pt-tree-node-icon,
+.orgdown-sidebar .pt-tree-node-caret {
+    color: #D8E1E8;
+}
+
+.orgdown-sidebar .pt-tree-node-content {
+    height: 24px;
+}
+
+.orgdown-sidebar .pt-tree-node-caret,
+.pt-tree-node-caret-none {
+    min-width: 24px;
+    line-height: 24px;
+}
+
+.orgdown-doclist {
+    height: 100%;
+    background: rgb(251, 251, 251);
+    display: flex;
+    flex-direction: column;
+    .orgdown-noteinfo {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        display: flex;
+        .title {
+            flex: 1;
+            text-align: center;
+        }
+        .action {
+            cursor: pointer;
+        }
+    }
+    .doclist-search {
+        margin: 10px;
+        flex: 0;
+    }
+    .docs {
+        flex: 1;
+        overflow-y: auto;
+        .doc-item {
+            height: 60px;
+            padding: 10px;
+            cursor: pointer;
+            .doc-title {
+              font-weight: 800;
+            }
+            &.active {
+                background: rgb( 65, 121, 251);
+                color: #fff;
+            }
+        }
+    }
+}
+
+.editorWrapper {
+  height: 100%;
+  width: 100%;
+  // margin: 50px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+
+  .pt-input {
+    box-shadow: none;
+    height: 60px;
+    font-weight: bold;
+  }
+  .editor {
+    flex: 1;
+    margin: 5px;
+  }
+}
+
+.orgdown-editor {
+    height: 100%;
+}
+
+.orgdown-editor-title {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    display: flex;
+}
+
+.orgdown-editor-title .top-title {
+    flex: 1;
+    border-bottom: 1px solid #F5F5F4;
+}
+
+.orgdown-editor-title .top-title .pt-input {
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    height: 100%;
+}
+
+.orgdown-editor-toolbar {
+    height: 30px;
+    background: yellow;
+}
