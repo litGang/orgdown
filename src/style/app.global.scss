@@ -110,31 +110,3 @@ body {
     margin: 5px;
   }
 }
-
-.orgdown-editor {
-    height: 100%;
-}
-
-.orgdown-editor-title {
-    height: 40px;
-    line-height: 40px;
-    padding: 0 10px;
-    display: flex;
-}
-
-.orgdown-editor-title .top-title {
-    flex: 1;
-    border-bottom: 1px solid #F5F5F4;
-}
-
-.orgdown-editor-title .top-title .pt-input {
-    border-radius: 0;
-    box-shadow: none;
-    width: 100%;
-    height: 100%;
-}
-
-.orgdown-editor-toolbar {
-    height: 30px;
-    background: yellow;
-}
