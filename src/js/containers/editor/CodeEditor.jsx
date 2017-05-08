@@ -6,6 +6,24 @@ import 'brace/theme/sqlserver';
 import AceEditor from 'react-ace';
 
 class CodeEditor extends React.Component {
+  constructor() {
+    super()
+    this.editor = undefined;
+  }
+
+  onLoad(editor) {
+    // init editor of this scope
+    this.editor = editor;
+  }
+
+  componentWillReceiveProps() {
+    // do update document of change
+  }
+
+  componentWillUpdate() {
+    // go to document last editor position
+    console.log(this.editor, 'componentWillUpdate')
+  }
 
   render() {
     let { doc } = this.props;
@@ -22,6 +40,7 @@ class CodeEditor extends React.Component {
             theme='sqlserver'
             value={doc.conetnt}
             showGutter={false}
+            onLoad={this.onLoad.bind(this)}
             highlightActiveLine={false}
             wrapEnabled={true}
             fontSize='14px'

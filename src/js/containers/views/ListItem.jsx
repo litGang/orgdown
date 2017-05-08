@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import { remote } from 'electron';
 const { Menu, MenuItem } = remote
 
-import {selectDoc} from '../../actions'
+import { selectDoc, deleteNote } from '../../actions'
 
 import classNames from "classnames";
 
 class ListItem extends React.Component {
   constructor() {
     super();
-    const menu = new Menu()
-    menu.append(new MenuItem({ label: 'MenuItem1', click() { cosole.log("data") } }))
-    menu.append(new MenuItem({ type: 'separator' }))
-    menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true }))
-    this.menu = menu;
+    this.selectItem = this.selectItem.bind(this);
+    this._deleteNote = this._deleteNote.bind(this);
+  }
 
-    this.selectItem.bind(this);
+  _deleteNote() {
+    let { item } = this.props;
+    this.props.dispatch(deleteNote(item))
   }
 
   render() {
@@ -42,7 +42,15 @@ class ListItem extends React.Component {
   }
 
   renderContextMenu() {
-    this.menu.popup(remote.getCurrentWindow())
+    let {item} = this.props;
+    let doDeleteNote = this._deleteNote;
+    const menu = new Menu()
+    menu.append(new MenuItem({ label: 'Delete Note', click() {
+      doDeleteNote(item)
+     } }))
+    menu.append(new MenuItem({ type: 'separator' }))
+    menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true }))
+    menu.popup(remote.getCurrentWindow())
   }
 }
 
