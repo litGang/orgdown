@@ -7,6 +7,8 @@ import { InputGroup, NonIdealState } from '@blueprintjs/core';
 import ListView from './views/ListView';
 import NotebookInfo from './notes/NotebookInfo';
 
+import './doclist.scss';
+
 import { loadDocs, addDocs, selectDoc } from '../actions/docs'
 
 class DocList extends React.Component {

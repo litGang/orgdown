@@ -36,7 +36,7 @@ function createWindow() {
 
   BrowserWindow.addDevToolsExtension(
     '/Users/wangyg/Library/Application Support/Google/Chrome/' +
-    'default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.14.3_0'
+    'default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.1_0'
   );
 }
 

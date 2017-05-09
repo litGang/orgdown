@@ -5,6 +5,8 @@ import 'brace/mode/asciidoc';
 import 'brace/theme/sqlserver';
 import AceEditor from 'react-ace';
 
+import './editor.scss';
+
 class CodeEditor extends React.Component {
   constructor() {
     super()

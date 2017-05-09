@@ -1,0 +1,35 @@
+.orgdown-sidebar {
+    height: 100%;
+    color: #fff;
+    background: rgb(42, 42, 42);
+    display: flex;
+    flex-direction: column;
+    -webkit-app-region: drag;
+    .baner {
+        padding: 5px 10px;
+        color: #ccc;
+        font-weight: bold;
+        -webkit-user-select: none;
+    }
+    .orgdown-treeview {
+        margin-top: 30px;
+        flex: 1;
+        .pt-tree-node-icon,
+        .pt-tree-node-caret {
+            color: #D8E1E8;
+        }
+        .pt-tree-node-content {
+            height: 24px;
+        }
+        .pt-tree-node-caret,
+        .pt-tree-node-caret-none {
+            min-width: 24px;
+            line-height: 24px;
+        }
+    }
+    .orgdown-userinfo {
+        line-height: 50px;
+        height: 50px;
+        padding: 0 20px;
+    }
+}
