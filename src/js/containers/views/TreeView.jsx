@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-type';
 
-import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler } from "@blueprintjs/core";
+import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler, Button, Dialog } from "@blueprintjs/core";
 import { remote } from 'electron';
 const { Menu, MenuItem } = remote;
 
@@ -45,9 +45,14 @@ class TreeView extends Component {
     );
   }
 
+  addNotebook2(nodeData) {
+
+  }
+
   createMenu(nodeData) {
+    let addNotebook2 = this.addNotebook2;
     const menu = new Menu();
-    menu.append(new MenuItem({ label: 'New Notebook...', click(node) { addNotebook(nodeData) } }));
+    menu.append(new MenuItem({ label: 'New Notebook...', click(node) { addNotebook2(nodeData) } }));
     menu.append(new MenuItem({ label: 'Rename', click(node) { console.log(nodeData) } }));
     menu.append(new MenuItem({ type: 'separator' }));
     menu.append(new MenuItem({ label: 'Delete Notebook...' }));

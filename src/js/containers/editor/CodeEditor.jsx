@@ -26,7 +26,7 @@ class CodeEditor extends React.Component {
 
   componentWillUpdate() {
     // go to document last editor position
-    console.log(this.editor, 'componentWillUpdate')
+    // console.log(this.editor, 'componentWillUpdate')
   }
 
   render() {

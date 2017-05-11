@@ -27,7 +27,6 @@ class ListItem extends React.Component {
     return (
       <div>
         <div className={styles}
-        onDragStart={() => console.log('12312')}
           onContextMenu={this.renderContextMenu.bind(this)}
           onClick={() => this.selectItem(item)} >
           <div className="doc-title">{item.title}</div>
@@ -43,21 +42,18 @@ class ListItem extends React.Component {
   }
 
   renderContextMenu() {
-    let {item} = this.props;
+    let { item } = this.props;
     let doDeleteNote = this._deleteNote;
     const menu = new Menu()
-    menu.append(new MenuItem({ label: 'Delete Note', click() {
-      doDeleteNote(item)
-     } }))
+    menu.append(new MenuItem({
+      label: 'Delete Note', click() {
+        doDeleteNote(item)
+      }
+    }))
     menu.append(new MenuItem({ type: 'separator' }))
     menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true }))
     menu.popup(remote.getCurrentWindow())
   }
 }
 
-
-let select = (state) => ({
-  docs: state.docs
-});
-
-export default connect(select)(ListItem);
+export default connect()(ListItem);
