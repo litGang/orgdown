@@ -1,17 +1,17 @@
 import { LOAD_NOTE } from "../actions";
 
 const initialState = {
-  notes: []
+  nodes: []
 };
 
 const handlers = {
 
   [LOAD_NOTE]: (state, action) => {
-    return { notes: action.data };
+    return { nodes: action.data };
   }
 };
 
-export default function noteReducer(state = initialState, action) {
+export default function nodeReducer(state = initialState, action) {
   let handler = handlers[action.type];
   if (!handler) return state;
   return { ...state, ...handler(state, action) };

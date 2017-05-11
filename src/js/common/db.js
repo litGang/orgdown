@@ -4,8 +4,8 @@ const app = require('electron').remote.app
 let storePath = app.getPath("userData");
 let db = {};
 
-db.notebooks = new Datastore({
-  filename: `${storePath}/data/notebook.db`,
+db.docs = new Datastore({
+  filename: `${storePath}/data/docs.db`,
   timestampData: true
 });
 
@@ -15,7 +15,7 @@ db.nodes = new Datastore({
 });
 
 // You need to load each database (here we do it asynchronously)
-db.notebooks.loadDatabase();
+db.docs.loadDatabase();
 db.nodes.loadDatabase();
 
 export default db;

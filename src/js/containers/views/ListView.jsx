@@ -9,7 +9,7 @@ class ListView extends React.Component {
   _renderItems(data) {
     return data.map((item) => {
       return (
-        <ListItem item={item} />
+        <ListItem key={item._id} item={item} />
       );
     });
   }

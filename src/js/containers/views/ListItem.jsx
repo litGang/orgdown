@@ -27,6 +27,7 @@ class ListItem extends React.Component {
     return (
       <div>
         <div className={styles}
+        onDragStart={() => console.log('12312')}
           onContextMenu={this.renderContextMenu.bind(this)}
           onClick={() => this.selectItem(item)} >
           <div className="doc-title">{item.title}</div>

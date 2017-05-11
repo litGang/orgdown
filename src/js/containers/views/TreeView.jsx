@@ -9,6 +9,19 @@ import { addNotebook } from '../../actions'
 
 class TreeView extends Component {
 
+  constructor(props) {
+    super()
+    this.state = {
+      nodes: props.data
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      nodes: nextProps.data
+    })
+  }
+
   forEachNode(nodes, callback) {
     if (nodes == null) {
       return;
@@ -21,11 +34,9 @@ class TreeView extends Component {
   }
 
   render() {
-    let { data } = this.props;
     return (
       <Tree
-        key={133}
-        contents={data}
+        contents={this.state.nodes}
         onNodeClick={this.handleNodeClick.bind(this)}
         onNodeCollapse={this.handleNodeCollapse.bind(this)}
         onNodeExpand={this.handleNodeExpand.bind(this)}
@@ -37,7 +48,7 @@ class TreeView extends Component {
   createMenu(nodeData) {
     const menu = new Menu();
     menu.append(new MenuItem({ label: 'New Notebook...', click(node) { addNotebook(nodeData) } }));
-    menu.append(new MenuItem({ label: 'Rename', click(node) { addNotebook(nodeData) } }));
+    menu.append(new MenuItem({ label: 'Rename', click(node) { console.log(nodeData) } }));
     menu.append(new MenuItem({ type: 'separator' }));
     menu.append(new MenuItem({ label: 'Delete Notebook...' }));
     menu.popup(remote.getCurrentWindow());
@@ -48,7 +59,12 @@ class TreeView extends Component {
   }
 
   handleNodeClick(nodeData, _nodePath, e) {
-    console.log(nodeData, _nodePath)
+    const originallySelected = nodeData.isSelected;
+    if (!e.shiftKey) {
+      this.forEachNode(this.state.nodes, (n) => n.isSelected = false);
+    }
+    nodeData.isSelected = originallySelected == null ? true : !originallySelected;
+    this.setState(this.state);
   }
 
   handleNodeCollapse(nodeData) {

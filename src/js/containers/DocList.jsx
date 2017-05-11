@@ -21,10 +21,6 @@ class DocList extends React.Component {
     this.props.dispatch(loadDocs())
   }
 
-  componentWillReceiveProps(nextProps) {
-
-	}
-
   _onSelect() {
     let dispatch = this.props.dispatch
     return (data) => {
@@ -33,7 +29,7 @@ class DocList extends React.Component {
   }
 
   render() {
-    const { items } = this.props.docs;
+    const { docs } = this.props;
     return (
       <div className='orgdown-doclist'>
         <NotebookInfo notebook={{title: 'Java', count: 2}} />
@@ -43,7 +39,7 @@ class DocList extends React.Component {
           placeholder="Filter histogram..."
           type='search' />
         <div className='docs'>
-          <ListView data={items} />
+          <ListView data={docs} />
         </div>
       </div>
     );
@@ -51,7 +47,7 @@ class DocList extends React.Component {
 }
 
 let select = (state) => ({
-  docs: state.docs
+  docs: state.docReducer.docs
 });
 
 export default connect(select)(DocList);

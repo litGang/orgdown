@@ -25,8 +25,8 @@ class NotebookInfo extends React.Component {
         <div className="title">
           <b>{notebook.title}</b> {notebook.count}
         </div>
-        <div className="action" onClick={this._addNote.bind(this)}>
-          <span className="pt-icon-standard pt-icon-plus" />
+        <div className="action">
+          <a onClick={this._addNote.bind(this)}><span className="pt-icon-standard pt-icon-plus" /></a>
         </div>
       </div>
     )

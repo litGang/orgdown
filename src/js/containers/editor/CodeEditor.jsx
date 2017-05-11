@@ -20,6 +20,8 @@ class CodeEditor extends React.Component {
 
   componentWillReceiveProps() {
     // do update document of change
+    this.editor.gotoLine(0, 0, true)
+    this.editor.focus();
   }
 
   componentWillUpdate() {
