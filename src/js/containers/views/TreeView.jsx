@@ -7,13 +7,17 @@ const { Menu, MenuItem } = remote;
 
 import { addNotebook } from '../../actions'
 
+import AddNoteBookDialog from '../notes/AddNoteBookDialog'
+
 class TreeView extends Component {
 
   constructor(props) {
     super()
     this.state = {
-      nodes: props.data
+      nodes: props.data,
+      isOpen: false
     }
+    this.addNotebook2 = this.addNotebook2.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,20 +37,27 @@ class TreeView extends Component {
     }
   }
 
+  toggleDialog() {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   render() {
     return (
-      <Tree
-        contents={this.state.nodes}
-        onNodeClick={this.handleNodeClick.bind(this)}
-        onNodeCollapse={this.handleNodeCollapse.bind(this)}
-        onNodeExpand={this.handleNodeExpand.bind(this)}
-        onNodeContextMenu={this.renderContextMenu.bind(this)}
-        className={Classes.ELEVATION_0} />
+      <div>
+        <Tree
+          contents={this.state.nodes}
+          onNodeClick={this.handleNodeClick.bind(this)}
+          onNodeCollapse={this.handleNodeCollapse.bind(this)}
+          onNodeExpand={this.handleNodeExpand.bind(this)}
+          onNodeContextMenu={this.renderContextMenu.bind(this)}
+          className={Classes.ELEVATION_0} />
+          <AddNoteBookDialog isOpen={this.state.isOpen} />
+      </div>
     );
   }
 
   addNotebook2(nodeData) {
-
+    this.toggleDialog()
   }
 
   createMenu(nodeData) {

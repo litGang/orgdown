@@ -15,3 +15,8 @@
     margin: 5px;
   }
 }
+
+// hidden cursor when lost focuse
+.ace_hidden-cursors .ace_cursor {
+    opacity: 0;
+}

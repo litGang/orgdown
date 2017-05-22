@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler } from "@blueprintjs/core";
+import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler, Dialog, Button } from "@blueprintjs/core";
 import { remote } from 'electron';
 const { Menu, MenuItem } = remote;
 
@@ -49,6 +49,33 @@ class FileTree extends React.Component {
     this.forEachNode = this.forEachNode.bind(this);
   }
 
+  renderDialog() {
+    return (
+            <div>
+                <Button onClick={this.toggleDialog} text="Show dialog" />
+                <Dialog
+                    iconName="inbox"
+                    isOpen={this.state.isOpen}
+                    onClose={this.toggleDialog}
+                    title="Dialog header"
+                >
+                    <div className="pt-dialog-body">
+                        Some content
+                    </div>
+                    <div className="pt-dialog-footer">
+                        <div className="pt-dialog-footer-actions">
+                            <Button text="Secondary" />
+                            <Button
+                                intent={Intent.PRIMARY}
+                                onClick={this.toggleDialog}
+                                text="Primary"
+                            />
+                        </div>
+                    </div>
+                </Dialog>
+            </div>
+        );
+  }
 
   forEachNode(nodes, callback) {
     if (nodes == null) {
