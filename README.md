@@ -14,3 +14,5 @@ a desktop client for orgdown editor.
 4. npm install electron -g
 5. npm run start
 6. electron .
+
+# TypeScript
