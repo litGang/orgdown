@@ -14,13 +14,10 @@ export function loadNotes(sort) {
   }
 }
 
-export function addNotebook(note) {
+export function addNotebook(noteName, node) {
   return function (dispatch) {
-    db.notebooks.find({}, function (err, data) {
-      dispatch({
-        type: ADD_NOTEBOOK,
-        data: data
-      });
-    });
+    db.nodes.insert({label: noteName, parentId: node._id, iconName: 'folder-close'}, function(err, newNote) {
+      loadNotes()
+    })
   }
 }

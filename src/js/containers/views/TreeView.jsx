@@ -5,9 +5,8 @@ import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler, Button, Dialog } f
 import { remote } from 'electron';
 const { Menu, MenuItem } = remote;
 
-import { addNotebook } from '../../actions'
-
 import AddNoteBookDialog from '../notes/AddNoteBookDialog'
+import DeleteNoteBookDialog from '../notes/DeleteNoteBookDialog'
 
 class TreeView extends Component {
 
@@ -15,9 +14,11 @@ class TreeView extends Component {
     super()
     this.state = {
       nodes: props.data,
-      isOpen: false
+      isOpen: false,
+      note: undefined
     }
     this.addNotebook2 = this.addNotebook2.bind(this)
+    this.deleteNotebook = this.deleteNotebook.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,22 +52,34 @@ class TreeView extends Component {
           onNodeExpand={this.handleNodeExpand.bind(this)}
           onNodeContextMenu={this.renderContextMenu.bind(this)}
           className={Classes.ELEVATION_0} />
-          <AddNoteBookDialog isOpen={this.state.isOpen} />
+        <AddNoteBookDialog isOpen={this.state.isOpen} note={this.state.note} toggleDialog={this.toggleDialog.bind(this)} />
+        <DeleteNoteBookDialog isOpen={this.state.isOpen} note={this.state.note} toggleDialog={this.toggleDialog.bind(this)} />
       </div>
     );
   }
 
   addNotebook2(nodeData) {
+    this.setState({
+      note: nodeData
+    })
+    this.toggleDialog()
+  }
+
+  deleteNotebook(nodeData) {
+    this.setState({
+      note: nodeData
+    })
     this.toggleDialog()
   }
 
   createMenu(nodeData) {
     let addNotebook2 = this.addNotebook2;
+    let deleteNotebook = this.deleteNotebook;
     const menu = new Menu();
     menu.append(new MenuItem({ label: 'New Notebook...', click(node) { addNotebook2(nodeData) } }));
     menu.append(new MenuItem({ label: 'Rename', click(node) { console.log(nodeData) } }));
     menu.append(new MenuItem({ type: 'separator' }));
-    menu.append(new MenuItem({ label: 'Delete Notebook...' }));
+    menu.append(new MenuItem({ label: 'Delete Notebook...', click(node) { deleteNotebook(nodeData) } }));
     menu.popup(remote.getCurrentWindow());
   }
 

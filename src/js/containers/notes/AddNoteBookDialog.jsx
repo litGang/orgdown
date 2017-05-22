@@ -1,27 +1,43 @@
 import React from 'react'
-import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler, Button, Dialog } from "@blueprintjs/core";
+import {connect} from 'react-redux'
+import { InputGroup, Button, Dialog } from "@blueprintjs/core";
+
+import { addNotebook } from '../../actions'
 
 class AddNoteBookDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      noteName: props.noteName
+    }
+  }
+
+  saveNotebook() {
+    this.props.dispatch(addNotebook(this.state.noteName, this.props.note))
+    this.props.toggleDialog()
+  }
 
   render() {
     return (
       <Dialog
         iconName="inbox"
         isOpen={this.props.isOpen}
-        onClose={this.toggleDialog.bind(this)}
-        title="Dialog header">
+        onClose={this.props.toggleDialog}
+        title="New Notebooks">
         <div className="pt-dialog-body">
-          Some content
-          </div>
-        <div className="pt-dialog-footer">
-          <div className="pt-dialog-footer-actions">
-            <Button text="Secondary" />
-            <Button onClick={this.toggleDialog.bind(this)} text="Primary" />
+          <div>
+            <InputGroup onChange={(event) => {this.setState({noteName: event.target.value})}} placeholder="Text input" />
           </div>
         </div>
-      </Dialog>
+        <div className="pt-dialog-footer">
+          <div className="pt-dialog-footer-actions">
+            <Button text="Cancel" onClick={this.props.toggleDialog} />
+            <Button className="pt-button pt-intent-success" onClick={this.saveNotebook.bind(this)} text="Submit" />
+          </div>
+        </div>
+      </Dialog >
     )
   }
 }
 
-export default AddNoteBookDialog;
+export default connect()(AddNoteBookDialog);

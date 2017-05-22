@@ -13,3 +13,7 @@ body {
     font-size: 13px;
     font-family: -apple-system, BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light, Ubuntu, Droid Sans, sans-serif;
 }
+
+.pt-input:focus {
+    box-shadow: none;
+}
