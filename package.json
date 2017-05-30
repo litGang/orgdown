@@ -40,10 +40,12 @@
     "webpack-hot-middleware": "^2.18.0"
   },
   "dependencies": {
+    "@blueprintjs/core": "^1.18.0",
     "nedb": "^1.8.0",
     "prop-type": "0.0.1",
     "react": "^15.5.4",
     "react-ace": "^4.2.1",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1"
   }
 }

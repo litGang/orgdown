@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 
 import brace from 'brace';
 import 'brace/mode/asciidoc';
+import 'brace/mode/markdown';
 import 'brace/theme/sqlserver';
 import AceEditor from 'react-ace';
 
@@ -11,6 +13,7 @@ class CodeEditor extends React.Component {
   constructor() {
     super()
     this.editor = undefined;
+    this.resize = this.resize.bind(this)
   }
 
   onLoad(editor) {
@@ -29,6 +32,14 @@ class CodeEditor extends React.Component {
     // console.log(this.editor, 'componentWillUpdate')
   }
 
+  resize() {
+    // this.editor.resize()
+  }
+
+  componentWillMount() {
+    window.onresize = this.resize()
+  }
+
   render() {
     let { doc } = this.props;
     return (
@@ -40,8 +51,9 @@ class CodeEditor extends React.Component {
           <AceEditor
             width='100%'
             height='100%'
-            mode='asciidoc'
+            mode={doc.type}
             theme='sqlserver'
+            showPrintMargin={false}
             value={doc.conetnt}
             showGutter={false}
             onLoad={this.onLoad.bind(this)}

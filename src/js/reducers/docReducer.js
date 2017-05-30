@@ -8,28 +8,22 @@ const initialState = {
 const handlers = {
 
   [LOAD_DOCS]: (state, action) => {
-    let currentDoc = state.currentDoc
-    if (!currentDoc) {
-      currentDoc = action.data[0];
-      currentDoc.active = true;
-    }
-    return { docs: action.data, currentDoc: currentDoc };
+    return { docs: action.data };
   },
 
   [SELECT_DOC]: (state, action) => {
-    let currentDoc = action.data
-    if (!currentDoc) {
-      currentDoc = state.docs && state.docs[0]
-    }
+    let targetDoc = action.data
+    let currentDoc;
     var newState = state.docs.map((doc) => {
       doc.active = false
-      if (currentDoc._id === doc._id) {
-        doc.active = true
+      if (targetDoc._id === doc._id) {
+        currentDoc = doc
+        doc.active = true;
       }
       return doc;
     });
 
-    return {docs: newState, currentDoc: currentDoc};
+    return { docs: newState, currentDoc: currentDoc };
   }
 };
 

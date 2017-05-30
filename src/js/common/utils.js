@@ -11,7 +11,6 @@ export function unflatten(arr) {
     mappedArr[arrElem._id]['childNodes'] = [];
   }
 
-
   for (var id in mappedArr) {
     if (mappedArr.hasOwnProperty(id)) {
       mappedElem = mappedArr[id];
@@ -25,6 +24,5 @@ export function unflatten(arr) {
       }
     }
   }
-
   return tree;
 }

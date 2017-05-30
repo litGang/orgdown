@@ -8,6 +8,7 @@ class ListView extends React.Component {
 
   _renderItems(data) {
     return data.map((item) => {
+
       return (
         <ListItem key={item._id} item={item} />
       );
@@ -18,7 +19,10 @@ class ListView extends React.Component {
     const { data } = this.props;
     return (
       <div>
-        {this._renderItems(data)}
+        {data.map((item) => {
+          let newItem = { ...item }
+          return <ListItem key={newItem._id} item={newItem} />
+        })}
       </div>
     )
   }

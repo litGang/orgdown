@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import CodeEditor from './editor/CodeEditor'
-import MyTree from './MyTree'
 
 import { loadCurrentDoc } from '../actions'
 

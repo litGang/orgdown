@@ -7,13 +7,13 @@ import { deleteNotebook } from '../../actions'
 
 class DeleteNoteBookDialog extends React.Component {
 
-  doDelet() {
+  doDelete() {
     this.props.dispatch(deleteNotebook(this.props.note))
     this.props.toggleDialog()
   }
 
   doCancel() {
-
+    this.props.toggleDialog()
   }
 
   render() {
@@ -24,8 +24,8 @@ class DeleteNoteBookDialog extends React.Component {
         isOpen={this.props.isOpen}
         confirmButtonText="Move to Trash"
         cancelButtonText="Cancel"
-        onConfirm={this.doDelete}
-        onCancel={this.doCancel}
+        onConfirm={this.doDelete.bind(this)}
+        onCancel={this.doCancel.bind(this)}
       >
         <p>
           Are you sure you want to move <b>filename</b> to Trash? You will be able to restore

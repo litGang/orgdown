@@ -1,13 +1,27 @@
-import { LOAD_NOTE } from "../actions";
+import { LOAD_NOTE, SELECT_NODE } from "../actions";
 
 const initialState = {
-  nodes: []
+  nodes: [],
+  currentNode: undefined
 };
 
 const handlers = {
 
   [LOAD_NOTE]: (state, action) => {
-    return { nodes: action.data };
+    let currentNode = state.currentNode || action.data[0]
+    return { nodes: action.data, currentNode: currentNode };
+  },
+
+  [SELECT_NODE]: (state, action) => {
+    let targetNode = action.data
+    let currentNode;
+    var newState = state.nodes.map((node) => {
+      if (targetNode._id === node._id) {
+        currentNode = node
+      }
+      return node;
+    });
+    return { nodes: newState, currentNode: currentNode };
   }
 };
 

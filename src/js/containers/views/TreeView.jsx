@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-type';
+import { connect } from 'react-redux';
 
 import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler, Button, Dialog } from "@blueprintjs/core";
 import { remote } from 'electron';
 const { Menu, MenuItem } = remote;
+
+import { selectTreeItem, expandNode } from '../../actions/note'
 
 import AddNoteBookDialog from '../notes/AddNoteBookDialog'
 import DeleteNoteBookDialog from '../notes/DeleteNoteBookDialog'
@@ -14,7 +17,8 @@ class TreeView extends Component {
     super()
     this.state = {
       nodes: props.data,
-      isOpen: false,
+      isSaveOpen: false,
+      isDeleteOpen: false,
       note: undefined
     }
     this.addNotebook2 = this.addNotebook2.bind(this)
@@ -38,8 +42,12 @@ class TreeView extends Component {
     }
   }
 
-  toggleDialog() {
-    this.setState({ isOpen: !this.state.isOpen });
+  toggleSaveDialog() {
+    this.setState({ isSaveOpen: !this.state.isSaveOpen });
+  }
+
+  toggleDeleteDialog() {
+    this.setState({ isDeleteOpen: !this.state.isDeleteOpen });
   }
 
   render() {
@@ -52,8 +60,8 @@ class TreeView extends Component {
           onNodeExpand={this.handleNodeExpand.bind(this)}
           onNodeContextMenu={this.renderContextMenu.bind(this)}
           className={Classes.ELEVATION_0} />
-        <AddNoteBookDialog isOpen={this.state.isOpen} note={this.state.note} toggleDialog={this.toggleDialog.bind(this)} />
-        <DeleteNoteBookDialog isOpen={this.state.isOpen} note={this.state.note} toggleDialog={this.toggleDialog.bind(this)} />
+        <AddNoteBookDialog isOpen={this.state.isSaveOpen} note={this.state.note} toggleDialog={this.toggleSaveDialog.bind(this)} />
+        <DeleteNoteBookDialog isOpen={this.state.isDeleteOpen} note={this.state.note} toggleDialog={this.toggleDeleteDialog.bind(this)} />
       </div>
     );
   }
@@ -62,14 +70,14 @@ class TreeView extends Component {
     this.setState({
       note: nodeData
     })
-    this.toggleDialog()
+    this.toggleSaveDialog()
   }
 
   deleteNotebook(nodeData) {
     this.setState({
       note: nodeData
     })
-    this.toggleDialog()
+    this.toggleDeleteDialog()
   }
 
   createMenu(nodeData) {
@@ -84,27 +92,31 @@ class TreeView extends Component {
   }
 
   renderContextMenu(nodeData, _nodePath, e) {
+    this.handleNodeClick(nodeData, _nodePath, e);
     this.createMenu(nodeData)
   }
 
   handleNodeClick(nodeData, _nodePath, e) {
-    const originallySelected = nodeData.isSelected;
+    window.localStorage.path = _nodePath
     if (!e.shiftKey) {
       this.forEachNode(this.state.nodes, (n) => n.isSelected = false);
     }
-    nodeData.isSelected = originallySelected == null ? true : !originallySelected;
+    nodeData.isSelected = true;
+    this.props.dispatch(selectTreeItem(nodeData))
     this.setState(this.state);
   }
 
   handleNodeCollapse(nodeData) {
     nodeData.isExpanded = false;
+    this.props.dispatch(expandNode(nodeData, false))
     this.setState(this.state);
   }
 
   handleNodeExpand(nodeData) {
     nodeData.isExpanded = true;
+    this.props.dispatch(expandNode(nodeData, true))
     this.setState(this.state);
   }
 }
 
-export default TreeView;
+export default connect()(TreeView);
