@@ -4,7 +4,7 @@ import PropTypes from 'prop-type';
 
 import TreeView from './views/TreeView';
 import UserInfo from './user/UserInfo';
-import { loadNotes } from '../actions/note';
+import { loadNotes } from '../actions/nodes';
 
 import { unflatten } from '../common/utils'
 

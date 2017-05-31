@@ -8,8 +8,11 @@ const initialState = {
 const handlers = {
 
   [LOAD_NOTE]: (state, action) => {
-    let currentNode = state.currentNode || action.data[0]
-    return { nodes: action.data, currentNode: currentNode };
+    let currentNode = action.data.filter((item) => {
+      return item.isSelected
+    })
+    // let currentNode = state.currentNode || action.data[0]
+    return { nodes: action.data, currentNode: currentNode[0] };
   },
 
   [SELECT_NODE]: (state, action) => {

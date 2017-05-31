@@ -6,7 +6,7 @@ import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler, Button, Dialog } f
 import { remote } from 'electron';
 const { Menu, MenuItem } = remote;
 
-import { selectTreeItem, expandNode } from '../../actions/note'
+import { selectTreeItem, expandNode } from '../../actions/nodes'
 
 import AddNoteBookDialog from '../notes/AddNoteBookDialog'
 import DeleteNoteBookDialog from '../notes/DeleteNoteBookDialog'
@@ -84,6 +84,7 @@ class TreeView extends Component {
     let addNotebook2 = this.addNotebook2;
     let deleteNotebook = this.deleteNotebook;
     const menu = new Menu();
+    menu.append(new MenuItem({ label: 'New Document...', click(node) { addNotebook2(nodeData) } }));
     menu.append(new MenuItem({ label: 'New Notebook...', click(node) { addNotebook2(nodeData) } }));
     menu.append(new MenuItem({ label: 'Rename', click(node) { console.log(nodeData) } }));
     menu.append(new MenuItem({ type: 'separator' }));

@@ -3,6 +3,7 @@ export const LOAD_DOCS = 'LOAD_DOCS';
 export const SELECT_DOC = 'SELECT_DOC';
 
 export function loadDocs(node) {
+  console.log(node)
   return function (dispatch) {
     let filter = {}
     if (node) {

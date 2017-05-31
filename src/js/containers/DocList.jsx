@@ -13,7 +13,8 @@ import './doclist.scss';
 class DocList extends React.Component {
 
   componentWillMount() {
-    this.props.dispatch(loadDocs())
+    const { docs, currentNode } = this.props;
+    this.props.dispatch(loadDocs(currentNode))
   }
 
   render() {
