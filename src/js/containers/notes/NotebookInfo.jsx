@@ -6,6 +6,11 @@ const { Menu, MenuItem } = remote
 import { addDocs } from '../../actions/docs'
 
 class NotebookInfo extends React.Component {
+
+  componentWillReceiveProps(nextProps) {
+    // console.log('eaav', nextProps)
+  }
+
   _addNote() {
     let { dispatch, currentNode } = this.props
     const menu = new Menu()

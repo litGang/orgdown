@@ -88,7 +88,14 @@ class TreeView extends Component {
     menu.append(new MenuItem({ label: 'New Notebook...', click(node) { addNotebook2(nodeData) } }));
     menu.append(new MenuItem({ label: 'Rename', click(node) { console.log(nodeData) } }));
     menu.append(new MenuItem({ type: 'separator' }));
-    menu.append(new MenuItem({ label: 'Delete Notebook...', click(node) { deleteNotebook(nodeData) } }));
+    menu.append(new MenuItem({
+      label: 'Delete Notebook...',
+      click(node) {
+        if (node._id != 'root')
+        deleteNotebook(nodeData)
+      }
+    })
+    );
     menu.popup(remote.getCurrentWindow());
   }
 
@@ -98,7 +105,6 @@ class TreeView extends Component {
   }
 
   handleNodeClick(nodeData, _nodePath, e) {
-    window.localStorage.path = _nodePath
     if (!e.shiftKey) {
       this.forEachNode(this.state.nodes, (n) => n.isSelected = false);
     }

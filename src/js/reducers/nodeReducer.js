@@ -8,23 +8,19 @@ const initialState = {
 const handlers = {
 
   [LOAD_NOTE]: (state, action) => {
-    let currentNode = action.data.filter((item) => {
-      return item.isSelected
+    let currentNode;
+    action.data.map((item) => {
+      if (item._id === action.nodeId) {
+        item.isSelected = true
+      }
+      currentNode = item
     })
-    // let currentNode = state.currentNode || action.data[0]
-    return { nodes: action.data, currentNode: currentNode[0] };
+    return { nodes: action.data, currentNode: currentNode };
   },
 
   [SELECT_NODE]: (state, action) => {
-    let targetNode = action.data
-    let currentNode;
-    var newState = state.nodes.map((node) => {
-      if (targetNode._id === node._id) {
-        currentNode = node
-      }
-      return node;
-    });
-    return { nodes: newState, currentNode: currentNode };
+    console.log(action.data)
+    return { nodes: state.nodes, currentNode: action.data };
   }
 };
 

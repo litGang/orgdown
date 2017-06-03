@@ -5,13 +5,42 @@ import { Redirect } from 'react-router-dom'
 
 import { Classes, ITreeNode, Tooltip, Tree, TreeEventHandler } from "@blueprintjs/core";
 
+import { loadNodes } from '../actions/nodes';
+import { loadDocs } from '../actions/docs'
+
 import SideBar from './SideBar';
 import DocList from './DocList';
 import MindWork from './MindWork';
 
 class Orgdown extends React.Component {
+  constructor() {
+    super()
+    this.loadSideBarTreeView = this.loadSideBarTreeView.bind(this)
+    this.loadDocListView = this.loadDocListView.bind(this)
+    this.initEditor = this.initEditor.bind(this)
+  }
+
   initialize() {
     console.log("orgdown is initialize...")
+    let nodeId = localStorage.nodeId;
+    let docId = localStorage.docId;
+    let posInfo = localStorage.posInfo;
+
+    this.loadSideBarTreeView(nodeId)
+    this.loadDocListView(nodeId, docId);
+    this.initEditor(posInfo)
+  }
+
+  loadSideBarTreeView(nodeId) {
+    this.props.dispatch(loadNodes(nodeId))
+  }
+
+  loadDocListView(nodeId, docId) {
+    this.props.dispatch(loadDocs(nodeId, docId))
+  }
+
+  initEditor(posInfo) {
+    // this.props.dispatch(loadNotes(treeId))
   }
 
   componentWillMount() {
@@ -31,8 +60,4 @@ class Orgdown extends React.Component {
   }
 }
 
-let select = (dispatch, state) => ({
-  nodes: state.nodes
-});
-
-export default connect(select)(Orgdown);
+export default connect()(Orgdown);

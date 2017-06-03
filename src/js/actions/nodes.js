@@ -11,10 +11,11 @@ function loadAndRun(dispatch) {
   });
 }
 
-export function loadNotes(sort) {
+export function loadNodes(nodeId) {
   return function (dispatch) {
-    // db.nodes.insert({label: "china", parentId: "BxlcUfWAW23wknew", iconName: "folder-close"})
-    loadAndRun(dispatch)
+    db.nodes.find({}, function (err, data) {
+      dispatch({ type: LOAD_NOTE, data: data, nodeId: nodeId });
+    });
   }
 }
 
@@ -43,11 +44,7 @@ export function expandNode(node, state) {
 
 export function selectTreeItem(node) {
   return function (dispatch) {
-    db.nodes.update({}, { $set: { isSelected: false } }, { multi: true }, function (err, numReplaced) {
-      db.nodes.update({ _id: node._id }, { $set: { isSelected: true } }, { multi: false }, function (err, numReplaced) {
-        dispatch({ type: SELECT_NODE, data: node })
-        dispatch(loadDocs(node))
-      })
-    })
+    localStorage.nodeId = node._id
+    dispatch(loadDocs(node))
   }
 }

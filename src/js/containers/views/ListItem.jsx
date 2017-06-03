@@ -46,8 +46,9 @@ class ListItem extends React.Component {
     let doDeleteNote = this._deleteNote;
     const menu = new Menu()
     menu.append(new MenuItem({
-      label: 'Delete Note', click() {
+      label: 'Delete Note', click:() => {
         doDeleteNote(item)
+        this._deleteNote
       }
     }))
     menu.append(new MenuItem({ type: 'separator' }))

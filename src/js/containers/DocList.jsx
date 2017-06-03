@@ -11,11 +11,17 @@ import { loadDocs, addDocs, selectDoc } from '../actions/docs'
 import './doclist.scss';
 
 class DocList extends React.Component {
-
-  componentWillMount() {
-    const { docs, currentNode } = this.props;
-    this.props.dispatch(loadDocs(currentNode))
+  constructor() {
+    super()
+    this.inited = false;
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.currentNode && !this.inited) {
+  //     this.inited = true;
+  //     this.props.dispatch(loadDocs(nextProps.currentNode))
+  //   }
+  // }
 
   render() {
     const { docs, currentNode } = this.props;
@@ -36,7 +42,8 @@ class DocList extends React.Component {
 }
 
 let select = (state) => ({
-  docs: state.docReducer.docs
+  docs: state.docReducer.docs,
+  currentNode: state.nodeReducer.currentNode
 });
 
 export default connect(select)(DocList);

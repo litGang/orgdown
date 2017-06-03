@@ -13,7 +13,7 @@ import './sidebar.scss';
 class SideBar extends React.Component {
 
   componentWillMount() {
-    this.props.dispatch(loadNotes())
+    // this.props.dispatch(loadNotes())
   }
 
   _renderTreeView(datas) {

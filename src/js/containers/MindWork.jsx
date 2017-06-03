@@ -6,6 +6,9 @@ import CodeEditor from './editor/CodeEditor'
 import { loadCurrentDoc } from '../actions'
 
 class MindWork extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    this.setState({})
+  }
 
   render() {
     let { currentDoc } = this.props;
